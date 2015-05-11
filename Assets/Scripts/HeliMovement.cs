@@ -21,7 +21,6 @@ public class HeliMovement : MonoBehaviour {
 	
 	public float damping = 4.0f;
 	public float horizontalSensibility = 3.0f;
-	public float verticalSensibility = f;
 	
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
