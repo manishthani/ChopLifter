@@ -20,7 +20,7 @@ public class HeliMovement : MonoBehaviour {
 	public float sidewaysRotorTorqueMultiplier = 0.05f;		//Multiplicador per controlar la sensibilitat del Input
 	
 	public float damping = 4.0f;
-	public float horizontalSensibility = 0.1f;
+	public float horizontalSensibility = 3.0f;
 	
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
@@ -37,7 +37,7 @@ public class HeliMovement : MonoBehaviour {
 		if ( mainRotorActive == true ) {
 			torqueValue += (controlTorque * maxRotorForce * rotorVelocity);
 			
-			//GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity );
+			GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity );
 			
 			if ( Vector3.Angle( Vector3.up, transform.up ) < 80 ) {
 				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 4 );
@@ -48,7 +48,7 @@ public class HeliMovement : MonoBehaviour {
 			torqueValue -= (Vector3.up * maxRearRotorForce * rearRotorVelocity);
 		}
 		
-		//GetComponent<Rigidbody>().AddRelativeTorque( torqueValue );
+		GetComponent<Rigidbody>().AddRelativeTorque( torqueValue );
 	}
 	
 	void Update() {
