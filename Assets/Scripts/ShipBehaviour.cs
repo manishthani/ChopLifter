@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class ShipBehaviour : MonoBehaviour {
-
-	public float speed;
 	public float translate;
 	public float rotate;
 
@@ -16,6 +14,5 @@ public class ShipBehaviour : MonoBehaviour {
 	void Update () {
 		transform.Translate(translate,0.0f,0.0f);
 		transform.Rotate(0.0f,rotate, 0.0f);
-
 	}
 }

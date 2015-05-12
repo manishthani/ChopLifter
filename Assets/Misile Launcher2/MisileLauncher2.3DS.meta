@@ -1,17 +1,42 @@
 fileFormatVersion: 2
-guid: 1856262e8a5034e93bcb0ecdddedf12e
-timeCreated: 1431349164
+guid: 80dd8b1945e61429196f33ac1d0f1d17
+timeCreated: 1431460210
 licenseType: Free
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Cylinder09
-    100002: //RootNode
-    400000: Cylinder09
-    400002: //RootNode
-    2300000: Cylinder09
-    3300000: Cylinder09
-    4300000: Cylinder09
+    100000: //RootNode
+    100002: Mesh01
+    100004: Mesh02
+    100006: Mesh03
+    100008: Mesh04
+    100010: Mesh07
+    100012: Rocket
+    400000: //RootNode
+    400002: Mesh01
+    400004: Mesh02
+    400006: Mesh03
+    400008: Mesh04
+    400010: Mesh07
+    400012: Rocket
+    2300000: Mesh01
+    2300002: Mesh02
+    2300004: Mesh03
+    2300006: Mesh04
+    2300008: Mesh07
+    2300010: Rocket
+    3300000: Mesh01
+    3300002: Mesh02
+    3300004: Mesh03
+    3300006: Mesh04
+    3300008: Mesh07
+    3300010: Rocket
+    4300000: Mesh01
+    4300002: Mesh02
+    4300004: Mesh03
+    4300006: Mesh04
+    4300008: Rocket
+    4300010: Mesh07
   materials:
     importMaterials: 1
     materialName: 0
