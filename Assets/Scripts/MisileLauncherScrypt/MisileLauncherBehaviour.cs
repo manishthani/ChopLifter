@@ -14,11 +14,19 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 	void ActivateMisile(){
 		if(speed < 100) ++speed;
 		rocket.transform.Translate (new Vector3(0.0f, 0.5f, 0.5f) * speed * Time.deltaTime);
-		Destroy (rocket, 5.0f);
+		//Destroy (rocket, 5.0f); //Peta cuando se destruye porque deja de existir la instancia
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		ActivateMisile ();
+	}
+
+	void OnCollisionEnter(Collision collision) {
+
+		if (collision.gameObject.name == "Plane") {
+			Destroy (collision.collider.gameObject);
+			Destroy (gameObject);
+		}
 	}
 }
