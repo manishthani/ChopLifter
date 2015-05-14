@@ -14,8 +14,9 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 	void ActivateMisile(){
 		if(speed < 100) ++speed;
 		rocket.transform.Translate (new Vector3(0.0f, 0.5f, 0.5f) * speed * Time.deltaTime);
+		Destroy (rocket, 5.0f);
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
 		ActivateMisile ();
