@@ -75,7 +75,7 @@ public class HeliMovement : MonoBehaviour {
 		rotorRotation += maxRotorVelocity * rotorVelocity/2 * Time.deltaTime;
 		rearRotorRotation += maxRearRotorVelocity * rotorVelocity * Time.deltaTime;
 
-		Debug.Log ("MouseX: " + mouseX + ", mouseY: " + mouseY);
+		//Debug.Log ("MouseX: " + mouseX + ", mouseY: " + mouseY);
 
 		if (rotorVelocity > 0.5f) {
 			damping = 100.0f;
