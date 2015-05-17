@@ -12,7 +12,7 @@ public class ShipBehaviour : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		transform.Translate(translate,0.0f,0.0f);
+		transform.Translate(0.0f,0.0f,translate);
 		transform.Rotate(0.0f,rotate, 0.0f);
 	}
 }
