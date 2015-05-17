@@ -1,17 +1,32 @@
 fileFormatVersion: 2
-guid: 1856262e8a5034e93bcb0ecdddedf12e
-timeCreated: 1431349164
-licenseType: Free
+guid: 8979e9f9100b03b41b6fce4cb952e0d1
+timeCreated: 1431879072
+licenseType: Pro
 ModelImporter:
   serializedVersion: 18
   fileIDToRecycleName:
-    100000: Cylinder09
-    100002: //RootNode
-    400000: Cylinder09
-    400002: //RootNode
-    2300000: Cylinder09
-    3300000: Cylinder09
-    4300000: Cylinder09
+    100000: Mini_Gun_Barrel_Section_1
+    100002: Mini_Gun_Butt
+    100004: Mini_Gun_Butt_Grip
+    100006: Mini_Gun_Butt_Grip_2
+    100008: //RootNode
+    400000: Mini_Gun_Barrel_Section_1
+    400002: Mini_Gun_Butt
+    400004: Mini_Gun_Butt_Grip
+    400006: Mini_Gun_Butt_Grip_2
+    400008: //RootNode
+    2300000: Mini_Gun_Barrel_Section_1
+    2300002: Mini_Gun_Butt
+    2300004: Mini_Gun_Butt_Grip
+    2300006: Mini_Gun_Butt_Grip_2
+    3300000: Mini_Gun_Barrel_Section_1
+    3300002: Mini_Gun_Butt
+    3300004: Mini_Gun_Butt_Grip
+    3300006: Mini_Gun_Butt_Grip_2
+    4300000: Mini_Gun_Barrel_Section_1
+    4300002: Mini_Gun_Butt
+    4300004: Mini_Gun_Butt_Grip
+    4300006: Mini_Gun_Butt_Grip_2
   materials:
     importMaterials: 1
     materialName: 0
