@@ -16,11 +16,11 @@ public class HeliMovement : MonoBehaviour {
 	private float rearRotorVelocity = 0.0f;					//Valor entre 0 i 1
 	private float rearRotorRotation = 0.0f;					//Graus -> utilizat per les animacions
 	
-	public float fwdRotorTorqueMultiplier = 1f;			//Multiplicador per controlar la sensibilitat del Input
-	public float sidewaysRotorTorqueMultiplier = 1f;		//Multiplicador per controlar la sensibilitat del Input
+	public float fwdRotorTorqueMultiplier = 5f;			//Multiplicador per controlar la sensibilitat del Input
+	public float sidewaysRotorTorqueMultiplier = 0.5f;		//Multiplicador per controlar la sensibilitat del Input
 	
-	public float damping = 500.0f;
-	public float horizontalSensibility = 3.0f;
+	public float damping = 5.0f;
+	public float horizontalSensibility = 1.0f;
 	
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
@@ -68,7 +68,7 @@ public class HeliMovement : MonoBehaviour {
 		if ( Input.GetAxis( "Vertical2" ) != 0.0 ) {
 			rotorVelocity += Input.GetAxis( "Vertical2" ) * 0.001f;
 		}else{
-			rotorVelocity = Mathf.Lerp( rotorVelocity, hover_Rotor_Velocity, Time.deltaTime * Time.deltaTime * damping);
+			rotorVelocity = Mathf.Lerp( rotorVelocity, hover_Rotor_Velocity, Time.deltaTime * damping);
 		}
 		rearRotorVelocity = hover_Tail_Rotor_Velocity - Input.GetAxis ("Horizontal") * horizontalSensibility;
 		
