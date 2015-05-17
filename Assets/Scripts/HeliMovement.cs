@@ -7,7 +7,7 @@ public class HeliMovement : MonoBehaviour {
 	public GameObject rearRotor;
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
-	public static float maxRotorVelocity = 7200f;			//Graus per segon
+	public static float maxRotorVelocity = 3600f;			//Graus per segon
 	private float rotorVelocity = 0.0f;						//Valor entre 0 i 1
 	private float rotorRotation = 0.0f;						//Graus -> utilitzat per les animacions
 	
@@ -16,10 +16,10 @@ public class HeliMovement : MonoBehaviour {
 	private float rearRotorVelocity = 0.0f;					//Valor entre 0 i 1
 	private float rearRotorRotation = 0.0f;					//Graus -> utilizat per les animacions
 	
-	public float fwdRotorTorqueMultiplier = 0.1f;			//Multiplicador per controlar la sensibilitat del Input
-	public float sidewaysRotorTorqueMultiplier = 0.05f;		//Multiplicador per controlar la sensibilitat del Input
+	public float fwdRotorTorqueMultiplier = 1f;			//Multiplicador per controlar la sensibilitat del Input
+	public float sidewaysRotorTorqueMultiplier = 1f;		//Multiplicador per controlar la sensibilitat del Input
 	
-	public float damping = 4.0f;
+	public float damping = 500.0f;
 	public float horizontalSensibility = 3.0f;
 	
 	static bool mainRotorActive = true;	
@@ -39,7 +39,7 @@ public class HeliMovement : MonoBehaviour {
 			
 			GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity );
 			
-			if ( Vector3.Angle( Vector3.up, transform.up ) < 80 ) {
+			if ( Vector3.Angle( Vector3.up, transform.up ) < 90 ) {
 				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 4 );
 			}
 		}
