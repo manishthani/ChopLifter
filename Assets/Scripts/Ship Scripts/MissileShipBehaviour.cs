@@ -17,7 +17,7 @@ public class MissileShipBehaviour : MonoBehaviour {
 
 		GameObject otherGameObject = collision.collider.gameObject;
 		if(otherGameObject.name != "MisileTurret"){
-			if(otherGameObject.name != "WaterPlane" ) Destroy (collision.collider.gameObject);
+			if(otherGameObject.name != "WaterPlane" && otherGameObject.name != "Island1Terrain" && otherGameObject.name != "MainIslandTerrain") Destroy (collision.collider.gameObject);
 			Destroy (gameObject);
 		}
 	}
