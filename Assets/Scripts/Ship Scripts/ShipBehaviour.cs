@@ -19,7 +19,7 @@ public class ShipBehaviour : MonoBehaviour {
 	void OnCollisionEnter(Collision collision) {
 		//Destroy (collision.collider.gameObject);
 		//Destroy (gameObject);
-		Debug.Log ("My Name is : " + collision.gameObject.name);
+		//Debug.Log ("My Name is : " + collision.gameObject.name);
 	}
 		
 

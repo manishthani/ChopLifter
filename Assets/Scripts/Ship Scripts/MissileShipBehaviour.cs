@@ -12,9 +12,13 @@ public class MissileShipBehaviour : MonoBehaviour {
 
 	}
 
-	void OnColissionEnter(Collision collision){
+	void OnCollisionEnter(Collision collision){
 		Debug.Log ("My Name is : " + collision.gameObject.name);
-		//Destroy (collision.collider.gameObject);
-		//Destroy (gameObject);
+
+		GameObject otherGameObject = collision.collider.gameObject;
+		if(otherGameObject.name != "MisileTurret"){
+			if(otherGameObject.name != "WaterPlane" ) Destroy (collision.collider.gameObject);
+			Destroy (gameObject);
+		}
 	}
 }
