@@ -18,7 +18,7 @@ public class MissileTurretBehaviour : MonoBehaviour {
 
 			//Debug.Log ("ANGULO : " + transform.rotation.eulerAngles.y ) ;
 			//Aqui es donde se pone la velocidad y direccion donde quieres lanzar el misil, creo que hay que usar senos y cosenos para arreglarlo
-			missiles.GetComponent<Rigidbody>().velocity = missiles.transform.TransformDirection(new Vector3 (0.0f, 0.0f, 40.0f));
+			missiles.GetComponent<Rigidbody>().velocity = missiles.transform.TransformDirection(new Vector3 (0.0f, 0.0f, 25.0f));
 		}
 	}
 
