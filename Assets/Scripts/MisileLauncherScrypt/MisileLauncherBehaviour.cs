@@ -2,31 +2,41 @@
 using System.Collections;
 
 public class MisileLauncherBehaviour : MonoBehaviour {
-	//TODO: Hacer que sea teledirigido y que persiga al helicoptero
 	public GameObject rocket; 
-	float speed = 1;
+	public float fireRate;
+	public float maxMisileDuration;
+	float initialTime; 
+	float nextFire;
+	bool shootMisile;
+
+	Queue missileInstances, missileInstancesTime;
 	// Use this for initialization
 	void Start () {
-
+		nextFire = Time.time + fireRate;
+		initialTime = Time.time;
+		missileInstances = new Queue();
+		missileInstancesTime = new Queue ();
+		shootMisile = false;
 	}
 
 
-	void ActivateMisile(){
-		if(speed < 100) ++speed;
-		rocket.transform.Translate (new Vector3(0.0f, 0.5f, 0.5f) * speed * Time.deltaTime);
-		//Destroy (rocket, 5.0f); //Peta cuando se destruye porque deja de existir la instancia
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		ActivateMisile ();
-	}
-
-	void OnCollisionEnter(Collision collision) {
-
-		if (collision.gameObject.name == "Plane") {
-			Destroy (collision.collider.gameObject);
-			Destroy (gameObject);
+	void Update(){
+		if (Time.time > nextFire) {
+			missileInstancesTime.Enqueue(nextFire);
+			Debug.Log ("MISIIILLLL");
+			GameObject missile = Instantiate (rocket, transform.position  + new Vector3(0.0f,10.0f,0.0f), transform.rotation) as GameObject;
+			missile.transform.localScale = new Vector3(0.021049f, 0.021049f, 0.021049f);
+			missileInstances.Enqueue(missile);
+			missile.GetComponent<Rigidbody>().velocity = missile.transform.TransformDirection(new Vector3 (0.0f, 0.0f, 25.0f));
+			nextFire = Time.time + fireRate;
+		}
+		if (missileInstancesTime.Count != 0) {
+			float missileTime = (float)missileInstancesTime.Peek() ;
+			if (Time.time - missileTime > maxMisileDuration) {
+				missileInstancesTime.Dequeue();
+				GameObject misileToDelete = missileInstances.Dequeue () as GameObject;
+				Destroy (misileToDelete);
+			}
 		}
 	}
 }
