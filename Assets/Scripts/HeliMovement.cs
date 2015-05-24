@@ -101,5 +101,8 @@ public class HeliMovement : MonoBehaviour {
 			rotorVelocity = 0.0f;
 		}
 	}
+	void OnTriggerEnter (Collider other) {
+		Debug.Log ("I AM HELI COLLIDING WITH SPHERE!");
+	}
 	
 }
