@@ -75,9 +75,6 @@ AnimatorStateMachine:
       first: {fileID: 0}
       second: []
     data:
-      first: {fileID: 0}
-      second: []
-    data:
       first: {fileID: 110797406}
       second: []
   m_StateMachineBehaviours: []

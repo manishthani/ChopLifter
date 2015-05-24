@@ -5,7 +5,7 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: MichaelAnimation
+  m_Name: VictoriaAnimation
   serializedVersion: 5
   m_AnimatorParameters: []
   m_AnimatorLayers:
@@ -22,6 +22,26 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   m_MultiThreadedStateMachine: 1
+--- !u!1101 &110177450
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 110242048}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: .241935462
+  m_TransitionOffset: 0
+  m_ExitTime: .758064508
+  m_HasExitTime: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &110210250
 AnimatorState:
   serializedVersion: 5
@@ -48,13 +68,14 @@ AnimatorState:
   m_Name: mixamo.com
   m_Speed: 1
   m_CycleOffset: 0
-  m_Transitions: []
+  m_Transitions:
+  - {fileID: 110177450}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_Motion: {fileID: 7400000, guid: d93840b8ff98b463eb024bedfbd254a6, type: 3}
+  m_Motion: {fileID: 7400002, guid: df7728065d3f8431d83f2f95c17063b6, type: 3}
   m_Tag: 
 --- !u!1107 &110797406
 AnimatorStateMachine:
@@ -75,10 +96,10 @@ AnimatorStateMachine:
       first: {fileID: 0}
       second: []
     data:
-      first: {fileID: 0}
+      first: {fileID: 110797406}
       second: []
     data:
-      first: {fileID: 110797406}
+      first: {fileID: 110797406, guid: d2e6b9b8fa13a4217bcb6e6c7a43029d, type: 2}
       second: []
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 156, y: 0, z: 0}
