@@ -133,9 +133,13 @@ public class HeliMovement : MonoBehaviour {
 			rotorVelocity = 0.0f;
 		}
 	}
-	void OnTriggerEnter (Collider other) {
+	void OnTriggerExit (Collider other) {
 		//Aqui controlaremos que el helicoptero no pueda ir al mapa grande sin pasarse el pequeno
-		Debug.Log ("I AM HELI COLLIDING WITH SPHERE!");
+		Debug.Log ("Heyyy COME BACK");
+	}
+
+	void OnTriggerEnter (Collider other) {
+		Debug.Log ("OK, Now you are inside!");
 	}
 	
 }
