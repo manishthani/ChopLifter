@@ -13,13 +13,13 @@ public class HeliWeapons : MonoBehaviour {
 	private float leftWeaponFireTimer = 0.0f;
 	private float rightWeaponFireTimer = 0.0f;
 	
-	public int rightWeaponBullets = 400;
-	public int leftWeaponBullets = 400;
+	public int rightWeaponBullets = 200;
+	public int leftWeaponBullets = 200;
 	
 	// Update is called once per frame
 	void Update () {
 		leftGun.GetComponent<ParticleEmitter>().emit = false;
-		if (Input.GetButton("Fire1") && leftWeaponFireTimer >= weaponFireDelay) {
+		if (Input.GetButton("Fire1") && leftWeaponFireTimer >= weaponFireDelay && leftWeaponBullets > 0) {
 			leftWeaponFireTimer = 0.0f;
 			leftGun.GetComponent<AudioSource>().Play();
 			leftGun.GetComponent<ParticleEmitter>().emit = true;
@@ -33,7 +33,7 @@ public class HeliWeapons : MonoBehaviour {
 		leftWeaponFireTimer += Time.deltaTime;
 		
 		rightGun.GetComponent<ParticleEmitter> ().emit = false;
-		if (Input.GetButton("Fire2") && rightWeaponFireTimer >= weaponFireDelay) {
+		if (Input.GetButton("Fire2") && rightWeaponFireTimer >= weaponFireDelay && rightWeaponBullets > 0) {
 			rightWeaponFireTimer = 0.0f;
 			rightGun.GetComponent<AudioSource>().Play();
 			rightGun.GetComponent<ParticleEmitter>().emit = true;
