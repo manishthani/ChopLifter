@@ -7,7 +7,7 @@ public class HeliMovement : MonoBehaviour {
 	public GameObject rearRotor;
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
-	public static float maxRotorVelocity = 3600f;			//Graus per segon
+	public static float maxRotorVelocity = 7200f;			//Graus per segon
 	private float rotorVelocity = 0.0f;						//Valor entre 0 i 1
 	private float rotorRotation = 0.0f;						//Graus -> utilitzat per les animacions
 	
@@ -16,29 +16,59 @@ public class HeliMovement : MonoBehaviour {
 	private float rearRotorVelocity = 0.0f;					//Valor entre 0 i 1
 	private float rearRotorRotation = 0.0f;					//Graus -> utilizat per les animacions
 	
-	public float fwdRotorTorqueMultiplier = 5f;			//Multiplicador per controlar la sensibilitat del Input
+	public float fwdRotorTorqueMultiplier = 0.5f;			//Multiplicador per controlar la sensibilitat del Input
 	public float sidewaysRotorTorqueMultiplier = 0.5f;		//Multiplicador per controlar la sensibilitat del Input
 	
 	public float damping = 5.0f;
-	public float horizontalSensibility = 1.0f;
+	public float horizontalSensibility = 3.0f;
 	
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
-
-	float mouseX;
-	float mouseY;
-
+	
+	float mouseX = 0f;
+	float mouseY = 0f;
+	
+	float midX;
+	float midY;
+	
 	void Start() {
+		midX = Screen.width / 2;
+		midY = Screen.height / 2;
+		//Cursor.visible = false;
 	}
-
-
+	
+	
 	//FixedUpdate s'executa cada volta del bucle de fisica. No depen del framerate. Es el millor lloc per aplicar les forces
 	void FixedUpdate() {
-
+		
+		mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
+		mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
+		
+		if (Mathf.Abs (mouseX) < 5.0f) {
+			mouseX = 0.0f;
+		} else {
+			if (mouseX < 0){
+				mouseX = Mathf.Max(mouseX+5.0f, -30.0f);
+			} else {
+				mouseX = Mathf.Min(mouseX-5.0f, 30.0f);
+			}
+		}
+		
+		
+		if (Mathf.Abs (mouseY) < 5.0f) {
+			mouseY = 0.0f;
+		} else {
+			if (mouseY < 0){
+				mouseY = Mathf.Max(mouseY+5.0f, -40.0f);
+			} else {
+				mouseY = Mathf.Min(mouseY-5.0f, 40.0f);
+			}
+		}
+		
 		//Força final que s'aplicara a l'helicopter
 		Vector3 torqueValue = new Vector3 (0, 0, 0); 
 		//Calcul de la força per la inclinacio de l'helicopter
-		Vector3 controlTorque = new Vector3(-mouseY* fwdRotorTorqueMultiplier, 1.0f, mouseX * sidewaysRotorTorqueMultiplier);
+		Vector3 controlTorque = new Vector3(-mouseY/10* fwdRotorTorqueMultiplier, 1.0f, mouseX/10 * sidewaysRotorTorqueMultiplier);
 		
 		//Si el motor principal esta actiu, se suma la forca al Torque Value i s'aplica al Rigid Body de l'helicopter
 		if ( mainRotorActive == true ) {
@@ -47,7 +77,7 @@ public class HeliMovement : MonoBehaviour {
 			GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity);
 			
 			if ( Vector3.Angle( Vector3.up, transform.up ) < 80 ) {
-				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 4 );
+				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 2);
 			}
 		}
 		
@@ -59,41 +89,43 @@ public class HeliMovement : MonoBehaviour {
 	}
 	
 	void Update() {
-
+		
 		GetComponent<AudioSource>().pitch = rotorVelocity * 1.5f;
-
-		mouseX = Input.GetAxis ("Mouse X");
-		mouseY = Input.GetAxis ("Mouse Y");
-
+		
 		if ( mainRotorActive == true ) {
-			mainRotor.transform.rotation = transform.rotation * Quaternion.Euler( 0, -rotorRotation, 180 );
+			mainRotor.transform.rotation = transform.rotation * Quaternion.Euler( 0, rotorRotation, 180 );
 		}
 		if ( rearRotorActive == true ) {
 			rearRotor.transform.rotation = transform.rotation * Quaternion.Euler( rearRotorRotation, 0, 90 );
 		}
 		
-		rotorRotation += maxRotorVelocity * rotorVelocity/2 * Time.deltaTime;
+		rotorRotation += maxRotorVelocity * rotorVelocity/4 * Time.deltaTime;
 		rearRotorRotation += maxRearRotorVelocity * rotorVelocity * Time.deltaTime;
-
-		//Debug.Log ("MouseX: " + mouseX + ", mouseY: " + mouseY);
-
+		
+		
 		if (rotorVelocity > 0.5f) {
 			damping = 100.0f;
 		}
-
+		
 		if (rotorVelocity < 0.2f) {
 			damping = 5.0f;
 		}
 		
+		//		if (rotorVelocity <= 0.05f) {
+		//			Cursor.lockState = CursorLockMode.Locked;
+		//		} else {
+		//			Cursor.lockState = CursorLockMode.Confined;
+		//		}
+		
 		float hover_Rotor_Velocity = (GetComponent<Rigidbody>().mass * Mathf.Abs (Physics.gravity.y) / maxRotorForce);
 		float hover_Tail_Rotor_Velocity = (maxRotorForce * rotorVelocity) / maxRearRotorForce;
 		
-		if ( Input.GetAxis( "Vertical2" ) != 0.0 ) {
-			rotorVelocity += Input.GetAxis( "Vertical2" ) * 0.001f;
+		if ( Input.GetAxis( "Vertical" ) != 0.0 ) {
+			rotorVelocity += Input.GetAxis( "Vertical" ) * 0.001f;
 		}else{
 			rotorVelocity = Mathf.Lerp( rotorVelocity, hover_Rotor_Velocity, Time.deltaTime * Time.deltaTime * damping);
 		}
-		rearRotorVelocity = hover_Tail_Rotor_Velocity - Input.GetAxis ("Horizontal2") * horizontalSensibility;
+		rearRotorVelocity = hover_Tail_Rotor_Velocity - Input.GetAxis ("Horizontal");
 		
 		if ( rotorVelocity > 1.0 ) {
 			rotorVelocity = 1.0f;
