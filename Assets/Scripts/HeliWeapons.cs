@@ -15,7 +15,10 @@ public class HeliWeapons : MonoBehaviour {
 	
 	public int rightWeaponBullets = 200;
 	public int leftWeaponBullets = 200;
-	
+
+	void Start() {
+		bulletImpactPrefab.AddComponent<BoxCollider> ();
+	}
 	// Update is called once per frame
 	void Update () {
 		leftGun.GetComponent<ParticleEmitter>().emit = false;
@@ -46,4 +49,5 @@ public class HeliWeapons : MonoBehaviour {
 		}
 		rightWeaponFireTimer += Time.deltaTime;
 	}
+	
 }

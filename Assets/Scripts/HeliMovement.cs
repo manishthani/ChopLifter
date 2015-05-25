@@ -44,24 +44,24 @@ public class HeliMovement : MonoBehaviour {
 		mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
 		mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
 		
-		if (Mathf.Abs (mouseX) < 5.0f) {
+		if (Mathf.Abs (mouseX) < 2.0f) {
 			mouseX = 0.0f;
 		} else {
 			if (mouseX < 0){
-				mouseX = Mathf.Max(mouseX+5.0f, -30.0f);
+				mouseX = Mathf.Max(mouseX+2.0f, -30.0f);
 			} else {
-				mouseX = Mathf.Min(mouseX-5.0f, 30.0f);
+				mouseX = Mathf.Min(mouseX-2.0f, 30.0f);
 			}
 		}
 		
 		
-		if (Mathf.Abs (mouseY) < 5.0f) {
+		if (Mathf.Abs (mouseY) < 2.0f) {
 			mouseY = 0.0f;
 		} else {
 			if (mouseY < 0){
-				mouseY = Mathf.Max(mouseY+5.0f, -40.0f);
+				mouseY = Mathf.Max(mouseY+2.0f, -30.0f);
 			} else {
-				mouseY = Mathf.Min(mouseY-5.0f, 40.0f);
+				mouseY = Mathf.Min(mouseY-2.0f, 30.0f);
 			}
 		}
 		
@@ -111,11 +111,11 @@ public class HeliMovement : MonoBehaviour {
 			damping = 5.0f;
 		}
 		
-		//		if (rotorVelocity <= 0.05f) {
-		//			Cursor.lockState = CursorLockMode.Locked;
-		//		} else {
-		//			Cursor.lockState = CursorLockMode.Confined;
-		//		}
+		if (rotorVelocity <= 0.05f) {
+			Cursor.lockState = CursorLockMode.Locked;
+		} else {
+			Cursor.lockState = CursorLockMode.None;
+		}
 		
 		float hover_Rotor_Velocity = (GetComponent<Rigidbody>().mass * Mathf.Abs (Physics.gravity.y) / maxRotorForce);
 		float hover_Tail_Rotor_Velocity = (maxRotorForce * rotorVelocity) / maxRearRotorForce;
