@@ -27,7 +27,7 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 			GameObject missile = Instantiate (rocket, transform.position  + new Vector3(0.0f,10.0f,0.0f), transform.rotation) as GameObject;
 			missile.transform.localScale = new Vector3(0.021049f, 0.021049f, 0.021049f);
 			missileInstances.Enqueue(missile);
-			missile.GetComponent<Rigidbody>().velocity = missile.transform.TransformDirection(new Vector3 (0.0f, 0.0f, 25.0f));
+			missile.GetComponent<Rigidbody>().velocity = missile.transform.TransformDirection(new Vector3 (0.0f, 10.0f, 25.0f));
 			nextFire = Time.time + fireRate;
 		}
 		if (missileInstancesTime.Count != 0) {

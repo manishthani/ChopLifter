@@ -141,5 +141,8 @@ public class HeliMovement : MonoBehaviour {
 	void OnTriggerEnter (Collider other) {
 		Debug.Log ("OK, Now you are inside!");
 	}
-	
+
+	void OnCollisionEnter(Collision other) {
+		Debug.Log ("The collided object is: " + other.gameObject.name);
+	}
 }
