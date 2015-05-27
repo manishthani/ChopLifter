@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class HeliWeapons : MonoBehaviour {
 	
 	public GameObject rightGun;
 	public GameObject leftGun;
+
+	public Slider rightGunSlider;
+	public Slider leftGunSlider;
 	
-	float weaponFireDelay = 0.2f;
+	public float weaponFireDelay = 0.2f;
 	
 	public GameObject bulletImpactPrefab;
 	
@@ -17,7 +21,9 @@ public class HeliWeapons : MonoBehaviour {
 	public int leftWeaponBullets = 200;
 
 	void Start() {
-		bulletImpactPrefab.AddComponent<BoxCollider> ();
+		BoxCollider collider =bulletImpactPrefab.AddComponent<BoxCollider> ();
+		collider.size = new Vector3 (0.01f, 0.01f, 0.01f);
+		rightGunSlider.maxValue = leftGunSlider.maxValue = rightWeaponBullets;
 	}
 	// Update is called once per frame
 	void Update () {
@@ -32,6 +38,7 @@ public class HeliWeapons : MonoBehaviour {
 				Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
 			}
 			--leftWeaponBullets;
+			leftGunSlider.value = leftWeaponBullets;
 		}
 		leftWeaponFireTimer += Time.deltaTime;
 		
@@ -46,8 +53,8 @@ public class HeliWeapons : MonoBehaviour {
 				Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
 			}
 			--rightWeaponBullets;
+			rightGunSlider.value = rightWeaponBullets;
 		}
 		rightWeaponFireTimer += Time.deltaTime;
 	}
-	
 }

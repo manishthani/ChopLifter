@@ -7,7 +7,7 @@ public class HeliMovement : MonoBehaviour {
 	public GameObject rearRotor;
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
-	public static float maxRotorVelocity = 7200f;			//Graus per segon
+	public static float maxRotorVelocity = 3600f;			//Graus per segon
 	private float rotorVelocity = 0.0f;						//Valor entre 0 i 1
 	private float rotorRotation = 0.0f;						//Graus -> utilitzat per les animacions
 	
@@ -34,7 +34,7 @@ public class HeliMovement : MonoBehaviour {
 	void Start() {
 		midX = Screen.width / 2;
 		midY = Screen.height / 2;
-		//Cursor.visible = false;
+		Cursor.visible = false;
 	}
 	
 	
@@ -99,7 +99,7 @@ public class HeliMovement : MonoBehaviour {
 			rearRotor.transform.rotation = transform.rotation * Quaternion.Euler( rearRotorRotation, 0, 90 );
 		}
 		
-		rotorRotation += maxRotorVelocity * rotorVelocity/4 * Time.deltaTime;
+		rotorRotation += maxRotorVelocity * rotorVelocity/2 * Time.deltaTime;
 		rearRotorRotation += maxRearRotorVelocity * rotorVelocity * Time.deltaTime;
 		
 		
@@ -111,7 +111,7 @@ public class HeliMovement : MonoBehaviour {
 			damping = 5.0f;
 		}
 		
-		if (rotorVelocity <= 0.05f) {
+		if (rotorVelocity <= 0.1f) {
 			Cursor.lockState = CursorLockMode.Locked;
 		} else {
 			Cursor.lockState = CursorLockMode.None;
