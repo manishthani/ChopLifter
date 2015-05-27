@@ -518,6 +518,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightGun: {fileID: 994081742}
   leftGun: {fileID: 1328425772}
+  rightGunSlider: {fileID: 0}
+  leftGunSlider: {fileID: 0}
+  weaponFireDelay: .200000003
   bulletImpactPrefab: {fileID: 100000, guid: b430705aabb516c47bfe0d6bc29e9249, type: 2}
   rightWeaponBullets: 200
   leftWeaponBullets: 200
@@ -627,7 +630,6 @@ GameObject:
   - 20: {fileID: 94481908}
   - 124: {fileID: 94481907}
   - 92: {fileID: 94481906}
-  - 81: {fileID: 94481905}
   m_Layer: 0
   m_Name: DriverCam
   m_TagString: Untagged
@@ -647,13 +649,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1619955920}
   m_RootOrder: 0
---- !u!81 &94481905
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 94481903}
-  m_Enabled: 1
 --- !u!92 &94481906
 Behaviour:
   m_ObjectHideFlags: 0

@@ -126,6 +126,7 @@ GameObject:
   - 65: {fileID: 6507358}
   - 65: {fileID: 6529150}
   - 65: {fileID: 6585218}
+  - 65: {fileID: 6542916}
   m_Layer: 0
   m_Name: Bullet_Impact_Prefab
   m_TagString: Untagged
@@ -841,6 +842,18 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: NaN, y: NaN, z: NaN}
+  m_Center: {x: NaN, y: NaN, z: NaN}
+--- !u!65 &6542916
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .00999999978, y: .00999999978, z: .00999999978}
   m_Center: {x: NaN, y: NaN, z: NaN}
 --- !u!65 &6543982
 BoxCollider:
