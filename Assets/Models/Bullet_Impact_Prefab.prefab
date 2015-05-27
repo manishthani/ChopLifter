@@ -128,6 +128,9 @@ GameObject:
   - 65: {fileID: 6585218}
   - 65: {fileID: 6542916}
   - 65: {fileID: 6592334}
+  - 65: {fileID: 6557618}
+  - 65: {fileID: 6526088}
+  - 65: {fileID: 6542800}
   m_Layer: 0
   m_Name: Bullet_Impact_Prefab
   m_TagString: Untagged
@@ -688,6 +691,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: NaN, y: NaN, z: NaN}
   m_Center: {x: NaN, y: NaN, z: NaN}
+--- !u!65 &6526088
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: NaN, y: NaN, z: NaN}
+  m_Center: {x: NaN, y: NaN, z: NaN}
 --- !u!65 &6526644
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -833,6 +848,18 @@ BoxCollider:
   m_Size: {x: NaN, y: NaN, z: NaN}
   m_Center: {x: NaN, y: NaN, z: NaN}
 --- !u!65 &6542198
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: NaN, y: NaN, z: NaN}
+  m_Center: {x: NaN, y: NaN, z: NaN}
+--- !u!65 &6542800
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1037,6 +1064,18 @@ BoxCollider:
   m_Size: {x: NaN, y: NaN, z: NaN}
   m_Center: {x: NaN, y: NaN, z: NaN}
 --- !u!65 &6557566
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: .00999999978, y: .00999999978, z: .00999999978}
+  m_Center: {x: NaN, y: NaN, z: NaN}
+--- !u!65 &6557618
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

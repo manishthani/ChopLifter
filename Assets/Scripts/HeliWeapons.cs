@@ -13,25 +13,35 @@ public class HeliWeapons : MonoBehaviour {
 	public float weaponFireDelay = 0.2f;
 	
 	public GameObject bulletImpactPrefab;
+
+	public int rightWeaponBullets = 200;
+	public int leftWeaponBullets = 200;
 	
 	private float leftWeaponFireTimer = 0.0f;
 	private float rightWeaponFireTimer = 0.0f;
-	
-	public int rightWeaponBullets = 200;
-	public int leftWeaponBullets = 200;
 
-	void Start() {
-		BoxCollider collider =bulletImpactPrefab.AddComponent<BoxCollider> ();
-		collider.size = new Vector3 (0.01f, 0.01f, 0.01f);
+	private ParticleEmitter leftParticleEmitter;
+	private ParticleEmitter rightParticleEmitter;
+
+	private AudioSource leftAudioSource;
+	private AudioSource rightAudioSource;
+
+	void Awake() {
+		BoxCollider collider = bulletImpactPrefab.AddComponent<BoxCollider> ();
 		rightGunSlider.maxValue = leftGunSlider.maxValue = rightWeaponBullets;
+		rightGunSlider.value = leftGunSlider.value = leftWeaponBullets;
+		leftParticleEmitter = leftGun.GetComponent<ParticleEmitter> ();
+		rightParticleEmitter = rightGun.GetComponent<ParticleEmitter> ();
+		leftAudioSource = leftGun.GetComponent<AudioSource> ();
+		rightAudioSource = rightGun.GetComponent<AudioSource> ();
 	}
 	// Update is called once per frame
 	void Update () {
-		leftGun.GetComponent<ParticleEmitter>().emit = false;
+		leftParticleEmitter.emit = false;
 		if (Input.GetButton("Fire1") && leftWeaponFireTimer >= weaponFireDelay && leftWeaponBullets > 0) {
 			leftWeaponFireTimer = 0.0f;
-			leftGun.GetComponent<AudioSource>().Play();
-			leftGun.GetComponent<ParticleEmitter>().emit = true;
+			leftAudioSource.Play();
+			leftParticleEmitter.emit = true;
 			
 			RaycastHit hit = new RaycastHit();
 			if (Physics.Raycast(leftGun.transform.position, leftGun.transform.forward, out hit)) {
@@ -42,11 +52,11 @@ public class HeliWeapons : MonoBehaviour {
 		}
 		leftWeaponFireTimer += Time.deltaTime;
 		
-		rightGun.GetComponent<ParticleEmitter> ().emit = false;
+		rightParticleEmitter.emit = false;
 		if (Input.GetButton("Fire2") && rightWeaponFireTimer >= weaponFireDelay && rightWeaponBullets > 0) {
 			rightWeaponFireTimer = 0.0f;
-			rightGun.GetComponent<AudioSource>().Play();
-			rightGun.GetComponent<ParticleEmitter>().emit = true;
+			rightAudioSource.Play();
+			rightParticleEmitter.emit = true;
 			
 			RaycastHit hit = new RaycastHit();
 			if (Physics.Raycast(rightGun.transform.position, rightGun.transform.forward, out hit)) {
