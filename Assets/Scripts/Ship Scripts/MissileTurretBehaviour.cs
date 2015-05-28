@@ -4,7 +4,9 @@ using System.Collections;
 public class MissileTurretBehaviour : MonoBehaviour {
 	public float fireRate;
 	public GameObject shotMissile;
+	public float velocityZ;
 	float nextFire;
+
 	// Use this for initialization
 	void Start () {
 		nextFire = Time.time + fireRate;
@@ -18,7 +20,8 @@ public class MissileTurretBehaviour : MonoBehaviour {
 
 			//Debug.Log ("ANGULO : " + transform.rotation.eulerAngles.y ) ;
 			//Aqui es donde se pone la velocidad y direccion donde quieres lanzar el misil, creo que hay que usar senos y cosenos para arreglarlo
-			missiles.GetComponent<Rigidbody>().velocity = missiles.transform.TransformDirection(new Vector3 (0.0f, 0.0f, 25.0f));
+			Debug.Log (velocityZ);
+			missiles.GetComponent<Rigidbody>().velocity = missiles.transform.TransformDirection(new Vector3 (0.0f, 0.0f, velocityZ));
 		}
 	}
 
