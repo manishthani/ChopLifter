@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class HeliMovement : MonoBehaviour {
 	
@@ -24,7 +25,8 @@ public class HeliMovement : MonoBehaviour {
 	
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
-	
+
+	List<GameObject> survivorsOnBoard;
 	float mouseX = 0f;
 	float mouseY = 0f;
 	
@@ -35,6 +37,7 @@ public class HeliMovement : MonoBehaviour {
 		midX = Screen.width / 2;
 		midY = Screen.height / 2;
 		Cursor.visible = false;
+		survivorsOnBoard = new List<GameObject> ();
 	}
 	
 	
@@ -135,14 +138,22 @@ public class HeliMovement : MonoBehaviour {
 	}
 	void OnTriggerExit (Collider other) {
 		//Aqui controlaremos que el helicoptero no pueda ir al mapa grande sin pasarse el pequeno
-		Debug.Log ("Heyyy COME BACK");
+		Debug.Log ("OnTriggerExit: " + other.gameObject.name);
 	}
 
 	void OnTriggerEnter (Collider other) {
-		Debug.Log ("OK, Now you are inside!");
+		GameObject objectCollided = other.gameObject;
+		if (objectCollided.name == "walking") {
+			GameObject copy = new GameObject();
+			copy = objectCollided;
+			survivorsOnBoard.Add (copy);
+			Destroy (objectCollided);
+			Debug.Log ("SURVIVOR ARRIVED AND ADDED!");
+		}
+		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
 
 	void OnCollisionEnter(Collision other) {
-		Debug.Log ("The collided object is: " + other.gameObject.name);
+		Debug.Log ("OnCollisionEnter: " + other.gameObject.name);
 	}
 }

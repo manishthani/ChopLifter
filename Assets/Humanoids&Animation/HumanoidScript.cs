@@ -17,7 +17,6 @@ public class HumanoidScript : MonoBehaviour {
 
 		if (Time.time > initialTime && once) {
 			once = false;
-			Debug.Log ("ENTRA EN EL IF DE MICHAEL");
 			anim.SetBool ("stop", true);
 		}
 	}
