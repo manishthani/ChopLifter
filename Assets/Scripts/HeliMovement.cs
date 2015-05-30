@@ -165,7 +165,7 @@ public class HeliMovement : MonoBehaviour {
 				anim.SetBool ("notRescuedYet", false);
 			}
 		} else if (objectCollided.name == "superficie") {
-			//anim.SetBool("helicopterLanded", true);
+			objectCollided.GetComponent<Animator>().SetBool("helicopterLanded", true);
 		}
 		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
