@@ -13,7 +13,7 @@ public class Cam : MonoBehaviour {
 	
 	void LateUpdate() {
 		float currentAngle = transform.eulerAngles.y;
-		float desiredAngle = target.transform.eulerAngles.y;
+		float desiredAngle = target.transform.rotation.y;
 		float angle = Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * damping);
 		
 		Quaternion rotation = Quaternion.Euler(0, desiredAngle - 55, 0);

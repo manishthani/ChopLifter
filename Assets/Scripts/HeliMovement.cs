@@ -32,8 +32,12 @@ public class HeliMovement : MonoBehaviour {
 	float midX;
 	float midY;
 
+
 	Stack survivorsOnBoard;
 	float timeBetweenSurvivor;
+	
+	float midZone = 5.0f;
+	
 
 	void Start() {
 		midX = Screen.width / 2;
@@ -46,31 +50,7 @@ public class HeliMovement : MonoBehaviour {
 	
 	//FixedUpdate s'executa cada volta del bucle de fisica. No depen del framerate. Es el millor lloc per aplicar les forces
 	void FixedUpdate() {
-		
-		mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
-		mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
-		
-		if (Mathf.Abs (mouseX) < 2.0f) {
-			mouseX = 0.0f;
-		} else {
-			if (mouseX < 0){
-				mouseX = Mathf.Max(mouseX+2.0f, -30.0f);
-			} else {
-				mouseX = Mathf.Min(mouseX-2.0f, 30.0f);
-			}
-		}
-		
-		
-		if (Mathf.Abs (mouseY) < 2.0f) {
-			mouseY = 0.0f;
-		} else {
-			if (mouseY < 0){
-				mouseY = Mathf.Max(mouseY+2.0f, -30.0f);
-			} else {
-				mouseY = Mathf.Min(mouseY-2.0f, 30.0f);
-			}
-		}
-		
+
 		//Força final que s'aplicara a l'helicopter
 		Vector3 torqueValue = new Vector3 (0, 0, 0); 
 		//Calcul de la força per la inclinacio de l'helicopter
@@ -95,7 +75,30 @@ public class HeliMovement : MonoBehaviour {
 	}
 	
 	void Update() {
+		mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
+		mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
 		
+		if (Mathf.Abs (mouseX) < midZone) {
+			mouseX = 0.0f;
+		} else {
+			if (mouseX < 0){
+				mouseX = Mathf.Max(mouseX+midZone, -30.0f);
+			} else {
+				mouseX = Mathf.Min(mouseX-midZone, 30.0f);
+			}
+		}
+		
+		
+		if (Mathf.Abs (mouseY) < midZone) {
+			mouseY = 0.0f;
+		} else {
+			if (mouseY < 0){
+				mouseY = Mathf.Max(mouseY+midZone, -30.0f);
+			} else {
+				mouseY = Mathf.Min(mouseY-midZone, 30.0f);
+			}
+		}
+
 		GetComponent<AudioSource>().pitch = rotorVelocity * 1.5f;
 		
 		if ( mainRotorActive == true ) {
@@ -146,7 +149,6 @@ public class HeliMovement : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		GameObject objectCollided = other.gameObject;
-		Animator anim = aux.GetComponent<Animator> ();
 		//Si encuentra un superviviente y no ha sido rescatado aun, entonces lo salvamos
 		if (objectCollided.tag == "Survivor" && objectCollided.GetComponent<Animator> ().GetBool ("notRescuedYet")) {
 			survivorsOnBoard.Push (objectCollided);
@@ -156,13 +158,14 @@ public class HeliMovement : MonoBehaviour {
 			while (survivorsOnBoard.Count != 0) {
 				timeBetweenSurvivor = Time.time;
 				GameObject aux = survivorsOnBoard.Pop () as GameObject;
+				Animator anim = aux.GetComponent<Animator> ();
 				aux.transform.position = new Vector3 (transform.position.x + (survivorsOnBoard.Count % 3) * 1.25f, objectCollided.transform.position.y - 0.2f, transform.position.z);
 				aux.SetActive (true);
 
 				anim.SetBool ("notRescuedYet", false);
 			}
 		} else if (objectCollided.name == "superficie") {
-			anim.SetBool("helicopterLanded", true);
+			//anim.SetBool("helicopterLanded", true);
 		}
 		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
