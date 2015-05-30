@@ -161,11 +161,10 @@ public class HeliMovement : MonoBehaviour {
 				Animator anim = aux.GetComponent<Animator> ();
 				aux.transform.position = new Vector3 (transform.position.x + (survivorsOnBoard.Count % 3) * 1.25f, objectCollided.transform.position.y - 0.2f, transform.position.z);
 				aux.SetActive (true);
-
 				anim.SetBool ("notRescuedYet", false);
 			}
 		} else if (objectCollided.name == "superficie") {
-			objectCollided.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			objectCollided.transform.Find("Michael").GetComponent<Animator>().SetBool("helicopterLanded", true);
 		}
 		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
