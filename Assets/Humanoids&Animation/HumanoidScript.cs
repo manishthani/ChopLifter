@@ -21,7 +21,7 @@ public class HumanoidScript : MonoBehaviour {
 			if (anim.GetBool ("helicopterLanded") && onceWalk) {
 				anim.gameObject.transform.Translate (new Vector3 (0.0f, -0.8f, 0.0f));
 				onceWalk = false;
-				anim.SetBool ("stop", true);
+				anim.SetBool ("stop", true); // Walk State activated
 				walkingTime = Time.time;
 				Debug.Log ("WALKING TIME: " + walkingTime);
 			} else if (anim.GetBool ("stop")) {

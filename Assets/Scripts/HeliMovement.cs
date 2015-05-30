@@ -163,8 +163,14 @@ public class HeliMovement : MonoBehaviour {
 				aux.SetActive (true);
 				anim.SetBool ("notRescuedYet", false);
 			}
-		} else if (objectCollided.name == "superficie") {
-			objectCollided.transform.Find("Michael").GetComponent<Animator>().SetBool("helicopterLanded", true);
+		} else if (objectCollided.name.Split('-')[0] == "superficie") {
+			Debug.Log (objectCollided.transform.parent.name);
+			GameObject michaelSurvivor = GameObject.Find("Michael-" + objectCollided.name.Split('-')[1]);
+			GameObject adamSurvivor = GameObject.Find("Adam-" + objectCollided.name.Split('-')[1]);
+			GameObject victoriaSurvivor = GameObject.Find("Victoria-" + objectCollided.name.Split('-')[1]);
+			michaelSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			adamSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			victoriaSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
 		}
 		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
