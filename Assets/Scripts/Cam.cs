@@ -16,7 +16,7 @@ public class Cam : MonoBehaviour {
 		float desiredAngle = target.transform.eulerAngles.y;
 		float angle = Mathf.LerpAngle(currentAngle, desiredAngle, Time.deltaTime * damping);
 		
-		Quaternion rotation = Quaternion.Euler(0, desiredAngle, 0);
+		Quaternion rotation = Quaternion.Euler(0, desiredAngle - 55, 0);
 		transform.position = target.transform.position - (rotation * offset);
 		
 		transform.LookAt(target.transform);

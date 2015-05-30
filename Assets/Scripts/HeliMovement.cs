@@ -25,19 +25,22 @@ public class HeliMovement : MonoBehaviour {
 	
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
-
-	List<GameObject> survivorsOnBoard;
+	
 	float mouseX = 0f;
 	float mouseY = 0f;
 	
 	float midX;
 	float midY;
-	
+
+	Stack survivorsOnBoard;
+	float timeBetweenSurvivor;
+
 	void Start() {
 		midX = Screen.width / 2;
 		midY = Screen.height / 2;
 		Cursor.visible = false;
-		survivorsOnBoard = new List<GameObject> ();
+		survivorsOnBoard = new Stack();
+		timeBetweenSurvivor = 0.0f;
 	}
 	
 	
@@ -143,12 +146,23 @@ public class HeliMovement : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		GameObject objectCollided = other.gameObject;
-		if (objectCollided.name == "walking") {
-			GameObject copy = new GameObject();
-			copy = objectCollided;
-			survivorsOnBoard.Add (copy);
-			Destroy (objectCollided);
-			Debug.Log ("SURVIVOR ARRIVED AND ADDED!");
+		Animator anim = aux.GetComponent<Animator> ();
+		//Si encuentra un superviviente y no ha sido rescatado aun, entonces lo salvamos
+		if (objectCollided.tag == "Survivor" && objectCollided.GetComponent<Animator> ().GetBool ("notRescuedYet")) {
+			survivorsOnBoard.Push (objectCollided);
+			objectCollided.SetActive (false);
+			//Destroy (objectCollided);
+		} else if (objectCollided.name == "RescuePlatform") {
+			while (survivorsOnBoard.Count != 0) {
+				timeBetweenSurvivor = Time.time;
+				GameObject aux = survivorsOnBoard.Pop () as GameObject;
+				aux.transform.position = new Vector3 (transform.position.x + (survivorsOnBoard.Count % 3) * 1.25f, objectCollided.transform.position.y - 0.2f, transform.position.z);
+				aux.SetActive (true);
+
+				anim.SetBool ("notRescuedYet", false);
+			}
+		} else if (objectCollided.name == "superficie") {
+			anim.SetBool("helicopterLanded", true);
 		}
 		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
