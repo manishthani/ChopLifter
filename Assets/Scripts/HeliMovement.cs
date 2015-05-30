@@ -32,6 +32,8 @@ public class HeliMovement : MonoBehaviour {
 	
 	float midX;
 	float midY;
+
+	float midZone = 5.0f;
 	
 	void Start() {
 		midX = Screen.width / 2;
@@ -47,24 +49,24 @@ public class HeliMovement : MonoBehaviour {
 		mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
 		mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
 		
-		if (Mathf.Abs (mouseX) < 2.0f) {
+		if (Mathf.Abs (mouseX) < midZone) {
 			mouseX = 0.0f;
 		} else {
 			if (mouseX < 0){
-				mouseX = Mathf.Max(mouseX+2.0f, -30.0f);
+				mouseX = Mathf.Max(mouseX+midZone, -30.0f);
 			} else {
-				mouseX = Mathf.Min(mouseX-2.0f, 30.0f);
+				mouseX = Mathf.Min(mouseX-midZone, 30.0f);
 			}
 		}
 		
 		
-		if (Mathf.Abs (mouseY) < 2.0f) {
+		if (Mathf.Abs (mouseY) < midZone) {
 			mouseY = 0.0f;
 		} else {
 			if (mouseY < 0){
-				mouseY = Mathf.Max(mouseY+2.0f, -30.0f);
+				mouseY = Mathf.Max(mouseY+midZone, -30.0f);
 			} else {
-				mouseY = Mathf.Min(mouseY-2.0f, 30.0f);
+				mouseY = Mathf.Min(mouseY-midZone, 30.0f);
 			}
 		}
 		
