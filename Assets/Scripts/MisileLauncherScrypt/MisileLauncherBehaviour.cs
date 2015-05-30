@@ -23,7 +23,6 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 	void Update(){
 		if (Time.time > nextFire) {
 			missileInstancesTime.Enqueue(nextFire);
-			Debug.Log ("MISIIILLLL");
 			GameObject missile = Instantiate (rocket, transform.position + new Vector3 (0,3,0) , transform.rotation) as GameObject;
 			missile.transform.localScale = new Vector3(0.021049f, 0.021049f, 0.021049f);
 			missileInstances.Enqueue(missile);
