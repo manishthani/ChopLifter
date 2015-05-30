@@ -168,9 +168,9 @@ public class HeliMovement : MonoBehaviour {
 			GameObject michaelSurvivor = GameObject.Find("Michael-" + objectCollided.name.Split('-')[1]);
 			GameObject adamSurvivor = GameObject.Find("Adam-" + objectCollided.name.Split('-')[1]);
 			GameObject victoriaSurvivor = GameObject.Find("Victoria-" + objectCollided.name.Split('-')[1]);
-			michaelSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
-			adamSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
-			victoriaSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			if(michaelSurvivor != null) michaelSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			if(adamSurvivor != null) adamSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			if(victoriaSurvivor != null) victoriaSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
 		}
 		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 	}
