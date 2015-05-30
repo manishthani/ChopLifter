@@ -28,6 +28,7 @@ public class HeliWeapons : MonoBehaviour {
 
 	void Awake() {
 		BoxCollider collider = bulletImpactPrefab.AddComponent<BoxCollider> ();
+		collider.center = new Vector3 (0, 0, 0);
 		rightGunSlider.maxValue = leftGunSlider.maxValue = rightWeaponBullets;
 		rightGunSlider.value = leftGunSlider.value = leftWeaponBullets;
 		leftParticleEmitter = leftGun.GetComponent<ParticleEmitter> ();
