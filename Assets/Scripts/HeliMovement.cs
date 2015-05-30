@@ -8,7 +8,7 @@ public class HeliMovement : MonoBehaviour {
 	public GameObject rearRotor;
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
-	public static float maxRotorVelocity = 3600f;			//Graus per segon
+	public static float maxRotorVelocity = 4000f;			//Graus per segon
 	private float rotorVelocity = 0.0f;						//Valor entre 0 i 1
 	private float rotorRotation = 0.0f;						//Graus -> utilitzat per les animacions
 	
@@ -82,9 +82,9 @@ public class HeliMovement : MonoBehaviour {
 			mouseX = 0.0f;
 		} else {
 			if (mouseX < 0){
-				mouseX = Mathf.Max(mouseX+midZone, -30.0f);
+				mouseX = Mathf.Max(mouseX+midZone, -20.0f);
 			} else {
-				mouseX = Mathf.Min(mouseX-midZone, 30.0f);
+				mouseX = Mathf.Min(mouseX-midZone, 20.0f);
 			}
 		}
 		
