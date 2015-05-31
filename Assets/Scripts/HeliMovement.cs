@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class HeliMovement : MonoBehaviour {
 	
 	public GameObject mainRotor;
 	public GameObject rearRotor;
+
+	public Slider healthSlider;
+
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
 	public static float maxRotorVelocity = 4000f;			//Graus per segon
@@ -22,7 +26,8 @@ public class HeliMovement : MonoBehaviour {
 	
 	public float damping = 5.0f;
 	public float horizontalSensibility = 3.0f;
-	
+	public int health = 100;
+
 	static bool mainRotorActive = true;	
 	static bool rearRotorActive = true;
 	
@@ -148,6 +153,7 @@ public class HeliMovement : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other) {
+		Debug.Log ("ONTRIGGER ENTER" + other.gameObject.name);
 		GameObject objectCollided = other.gameObject;
 		//Si encuentra un superviviente y no ha sido rescatado aun, entonces lo salvamos
 		if (objectCollided.tag == "Survivor" && objectCollided.GetComponent<Animator> ().GetBool ("notRescuedYet")) {
@@ -155,6 +161,9 @@ public class HeliMovement : MonoBehaviour {
 			objectCollided.SetActive (false);
 			//Destroy (objectCollided);
 		} else if (objectCollided.name == "RescuePlatform") {
+			health += 30;
+			if (health > 100) health = 100;
+			healthSlider.value = health;
 			while (survivorsOnBoard.Count != 0) {
 				timeBetweenSurvivor = Time.time;
 				GameObject aux = survivorsOnBoard.Pop () as GameObject;
@@ -163,19 +172,23 @@ public class HeliMovement : MonoBehaviour {
 				aux.SetActive (true);
 				anim.SetBool ("notRescuedYet", false);
 			}
-		} else if (objectCollided.name.Split('-')[0] == "superficie") {
+		} else if (objectCollided.name.Split ('-') [0] == "superficie") {
 			Debug.Log (objectCollided.transform.parent.name);
-			GameObject michaelSurvivor = GameObject.Find("Michael-" + objectCollided.name.Split('-')[1]);
-			GameObject adamSurvivor = GameObject.Find("Adam-" + objectCollided.name.Split('-')[1]);
-			GameObject victoriaSurvivor = GameObject.Find("Victoria-" + objectCollided.name.Split('-')[1]);
-			if(michaelSurvivor != null) michaelSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
-			if(adamSurvivor != null) adamSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
-			if(victoriaSurvivor != null) victoriaSurvivor.GetComponent<Animator>().SetBool("helicopterLanded", true);
+			GameObject michaelSurvivor = GameObject.Find ("Michael-" + objectCollided.name.Split ('-') [1]);
+			GameObject adamSurvivor = GameObject.Find ("Adam-" + objectCollided.name.Split ('-') [1]);
+			GameObject victoriaSurvivor = GameObject.Find ("Victoria-" + objectCollided.name.Split ('-') [1]);
+			if (michaelSurvivor != null)
+				michaelSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
+			if (adamSurvivor != null)
+				adamSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
+			if (victoriaSurvivor != null)
+				victoriaSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
+		} else if (objectCollided.name == "WaterPlain" || objectCollided.name == "Rocket") {
+			Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
+			health -= 5;
+			healthSlider.value = health;
 		}
-		Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
+
 	}
 
-	void OnCollisionEnter(Collision other) {
-		Debug.Log ("OnCollisionEnter: " + other.gameObject.name);
-	}
 }

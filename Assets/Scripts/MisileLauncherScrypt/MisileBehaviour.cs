@@ -14,21 +14,18 @@ public class MisileBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other) {
-			Debug.Log ("Se destruye por : " + other.gameObject.name);
-			AudioSource.PlayClipAtPoint (audioExplosion, transform.position, volume);
-		if (other.gameObject.name != "MisileLauncher" && other.gameObject.name != "Rocket(Clone)"  && other.gameObject.name != "Rocket") {
-			GameObject explosionInstance = Instantiate (explosion, transform.position + new Vector3 (0.0f, 1.0f, 0.0f), transform.rotation) as GameObject;
-			Destroy (explosionInstance, 3);
-			Destroy (gameObject);
-		}
+		Debug.Log ("Se destruye por : " + other.gameObject.name);
+		AudioSource.PlayClipAtPoint (audioExplosion, transform.position, volume);
 		Transform parent = other.gameObject.transform.parent;
-		if (parent != null) {
-			if (other.gameObject.transform.parent.gameObject.name == "Helicopter"){ 
-				Destroy (other.gameObject.transform.parent.gameObject);
+		if (parent == null) {
+			if (other.gameObject.name != "MisileLauncher" && other.gameObject.name != "Rocket(Clone)"  && other.gameObject.name != "Rocket") {
+				GameObject explosionInstance = Instantiate (explosion, transform.position + new Vector3 (0.0f, 1.0f, 0.0f), transform.rotation) as GameObject;
+				Destroy (explosionInstance, 3);
+				Destroy (gameObject);
 			}
-		}
-		if (other.gameObject.name == "Navyship" || other.gameObject.name == "Plane") {
-			Destroy (other.gameObject);
+			if (other.gameObject.name == "Navyship" || other.gameObject.name == "Plane") {
+				Destroy (other.gameObject);
+			}
 		}
 		
 	}
