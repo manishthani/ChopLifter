@@ -21,9 +21,9 @@ public class EnemyHealth : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter(Collider collider) {
-		Debug.Log("NAME: " +collider.gameObject.name);
-		if (collider.gameObject.tag == "Bullet") {
+	void OnCollisionEnter(Collision collision) {
+		Debug.Log("NAME: " +collision.gameObject.name);
+		if (collision.gameObject.tag == "Bullet") {
 			Debug.Log("ASASDASASDFASDFASDFASDF HIT!");
 			health -= 5.0f;
 		}

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class HeliMovement : MonoBehaviour {
+
+	public GameObject explosion;
 	
 	public GameObject mainRotor;
 	public GameObject rearRotor;
@@ -69,7 +71,7 @@ public class HeliMovement : MonoBehaviour {
 				
 				GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity);
 				
-				if ( Vector3.Angle( Vector3.up, transform.up ) < 80 ) {
+				if ( Vector3.Angle( Vector3.up, transform.up ) < 60 ) {
 					transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 2);
 				}
 			}
@@ -150,18 +152,34 @@ public class HeliMovement : MonoBehaviour {
 			}else if ( rotorVelocity < 0.0) {
 				rotorVelocity = 0.0f;
 			}
+			if (health <= 0) {
+				alive = false;
+			}
 		}
 		else {
 			Application.LoadLevel(2);
 		}
 	}
-	void OnTriggerExit (Collider other) {
-		//Aqui controlaremos que el helicoptero no pueda ir al mapa grande sin pasarse el pequeno
-		//Debug.Log ("OnTriggerExit: " + other.gameObject.name);
+	void OnCollisionEnter (Collision other) {
+		GameObject objectCollided = other.gameObject;
+		if (objectCollided.tag == "Water") {
+			//Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
+			health -= 15;
+			healthSlider.value = health;
+		} else if (objectCollided.tag == "Rocket") {
+			health -= 30;
+			healthSlider.value= health;
+			GameObject aux = Instantiate(explosion,transform.position,transform.rotation) as GameObject	;
+			Destroy(aux,2);
+			Destroy(objectCollided);
+		} else if (objectCollided.tag == "Bullet") {
+			health -= 10;
+			healthSlider.value = health;
+		}
 	}
 
 	void OnTriggerEnter (Collider other) {
-		//Debug.Log ("ONTRIGGER ENTER" + other.gameObject.name);
+		//Debug.Log ("ONTRIGGER ENTER" + other.gameObject.name + " TAG: " + other.gameObject.tag);
 		GameObject objectCollided = other.gameObject;
 		//Si encuentra un superviviente y no ha sido rescatado aun, entonces lo salvamos
 		if (objectCollided.tag == "Survivor" && objectCollided.GetComponent<Animator> ().GetBool ("notRescuedYet")) {
@@ -192,13 +210,18 @@ public class HeliMovement : MonoBehaviour {
 			if (victoriaSurvivor != null)
 				victoriaSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
 
-			if (health <= 0) {
-				alive = false;
-			}
-		} else if (objectCollided.name == "WaterPlane" || objectCollided.name == "Rocket" || objectCollided.tag == "Bullet") {
+		} else if (objectCollided.tag == "Water") {
 			//Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
-			health -= 5;
+			health -= 50;
 			healthSlider.value = health;
+		} else if (objectCollided.tag == "Rocket") {
+			health -= 30;
+			healthSlider.value= health;
+			GameObject aux = Instantiate(explosion,transform.position,transform.rotation) as GameObject	;
+			Destroy(aux,2);
+			Destroy(objectCollided);
+		} else if (objectCollided.tag == "Bullet") {
+
 		}
 
 	}

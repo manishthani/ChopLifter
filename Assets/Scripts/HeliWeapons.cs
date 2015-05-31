@@ -49,6 +49,7 @@ public class HeliWeapons : MonoBehaviour {
 				RaycastHit hit = new RaycastHit();
 				if (Physics.Raycast(leftGun.transform.position, leftGun.transform.forward, out hit)) {
 					Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
+
 				}
 				--leftWeaponBullets;
 				leftGunSlider.value = leftWeaponBullets;
