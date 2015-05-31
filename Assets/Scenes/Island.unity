@@ -242,6 +242,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainRotor: {fileID: 703463766}
   rearRotor: {fileID: 1371253831}
+  healthSlider: {fileID: 0}
   maxRotorForce: 22241.1074
   maxRearRotorForce: 15000
   maxRearRotorVelocity: 2200
@@ -249,6 +250,7 @@ MonoBehaviour:
   sidewaysRotorTorqueMultiplier: .100000001
   damping: 5
   horizontalSensibility: 2
+  health: 100
 --- !u!54 &42432696
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13232,8 +13234,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 74086.125, y: -2695.91211, z: 177016.297}
-  m_Center: {x: -11485.4316, y: 2488.59814, z: 36596.0469}
+  m_Size: {x: 74086.1484, y: -1100.38281, z: 177016.297}
+  m_Center: {x: -11479.9141, y: 1896.49438, z: 36598.4297}
 --- !u!65 &1325188330
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19522,15 +19524,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 7adbbf378798047af86bdd6513bfd396, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -136.399994
+      value: -168.860001
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7adbbf378798047af86bdd6513bfd396, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.3000002
+      value: 14.8299999
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7adbbf378798047af86bdd6513bfd396, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -136.100006
+      value: -102.760002
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 7adbbf378798047af86bdd6513bfd396, type: 3}
       propertyPath: m_LocalRotation.x
