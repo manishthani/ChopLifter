@@ -13,7 +13,12 @@ public class ShipBehaviour : MonoBehaviour {
 	void Update () {
 		transform.Translate(0.0f,0.0f,translate);
 		transform.Rotate(0.0f,rotate, 0.0f);
+	}
 
+	void OnCollisionEnter(Collision col) {
+		if (col.gameObject.tag == "Bullet") {
+			Destroy (gameObject);
+		}
 	}
 
 
