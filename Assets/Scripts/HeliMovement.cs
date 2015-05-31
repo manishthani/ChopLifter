@@ -198,7 +198,8 @@ public class HeliMovement : MonoBehaviour {
 			//Destroy (objectCollided);
 		} else if (objectCollided.name == "RescuePlatform") {
 			health += 30;
-			if (health > 100) health = 100;
+			if (health > 100)
+				health = 100;
 			healthSlider.value = health;
 			while (survivorsOnBoard.Count != 0) {
 				timeBetweenSurvivor = Time.time;
@@ -208,7 +209,7 @@ public class HeliMovement : MonoBehaviour {
 				aux.SetActive (true);
 				anim.SetBool ("notRescuedYet", false);
 				++rescued;
-				score += Random.Range(50, 100);
+				score += Random.Range (50, 100);
 			}
 		} else if (objectCollided.name.Split ('-') [0] == "superficie") {
 			//Debug.Log (objectCollided.transform.parent.name);
@@ -222,7 +223,13 @@ public class HeliMovement : MonoBehaviour {
 			if (victoriaSurvivor != null)
 				victoriaSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
 		
-		}
+		} else if (objectCollided.tag == "HealthBox") {
+			health += 15;
+			if (health > 100)
+				health = 100;
+			healthSlider.value = health;
+			Destroy (objectCollided);
+		} 
 	}
 
 	public void AddPunctuation(int value) {

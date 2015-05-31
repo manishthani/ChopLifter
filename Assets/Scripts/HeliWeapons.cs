@@ -78,6 +78,12 @@ public class HeliWeapons : MonoBehaviour {
 		if (objectCollided.name == "RescuePlatform") {
 			leftWeaponBullets = rightWeaponBullets = 100;
 			leftGunSlider.value = rightGunSlider.value = 100;
+		} else if (objectCollided.tag == "AmmoBox") {
+			leftGunSlider.value += 15;
+			rightGunSlider.value += 15;
+			if (leftGunSlider.value > 100) leftGunSlider.value = 100;
+			if (rightGunSlider.value > 100) rightGunSlider.value = 100;
+			Destroy (objectCollided);
 		}
 	}
 
