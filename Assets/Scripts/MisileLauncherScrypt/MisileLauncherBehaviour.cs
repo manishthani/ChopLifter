@@ -5,6 +5,7 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 	public GameObject rocket; 
 	public float fireRate;
 	public float maxMisileDuration;
+	public GameObject explosion;
 	float initialTime; 
 	float nextFire;
 	bool shootMisile;
@@ -26,7 +27,10 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 			GameObject missile = Instantiate (rocket, transform.position + new Vector3 (0,3,0) , transform.rotation) as GameObject;
 			missile.transform.localScale = new Vector3(0.021049f, 0.021049f, 0.021049f);
 			missileInstances.Enqueue(missile);
-			missile.GetComponent<Rigidbody>().velocity = missile.transform.TransformDirection(new Vector3 (0.0f, 10.0f, 25.0f));
+			GameObject helicopter = GameObject.Find ("Helicopter");
+			missile.transform.LookAt(helicopter.transform);
+			//Modificar velocidad para que parezca que le estan disparando al helicoptero
+			missile.GetComponent<Rigidbody>().velocity = (helicopter.transform.position - missile.transform.position).normalized * 15f;
 			nextFire = Time.time + fireRate;
 		}
 		if (missileInstancesTime.Count != 0) {
@@ -34,6 +38,8 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 			if (Time.time - missileTime > maxMisileDuration) {
 				missileInstancesTime.Dequeue();
 				GameObject misileToDelete = missileInstances.Dequeue () as GameObject;
+				GameObject explosionInstance = Instantiate (explosion, misileToDelete.transform.position + new Vector3(0.0f,1.0f,0.0f), misileToDelete.transform.rotation) as GameObject;
+				Destroy (explosionInstance, 3);
 				Destroy (misileToDelete);
 			}
 		}
