@@ -1089,6 +1089,10 @@ Prefab:
       propertyPath: m_Name
       value: crate 4
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
   m_IsPrefabParent: 0
@@ -4363,6 +4367,10 @@ Prefab:
     - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
       propertyPath: m_Name
       value: crate 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
@@ -11368,6 +11376,10 @@ Prefab:
       propertyPath: m_Name
       value: AmmoBox 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
   m_IsPrefabParent: 0
@@ -13704,6 +13716,10 @@ Prefab:
       propertyPath: m_Name
       value: AmmoBox 6
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
   m_IsPrefabParent: 0
@@ -14066,6 +14082,10 @@ Prefab:
       propertyPath: m_Name
       value: AmmoBox 5
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
   m_IsPrefabParent: 0
@@ -14296,6 +14316,10 @@ Prefab:
       propertyPath: m_Name
       value: crate 2
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
   m_IsPrefabParent: 0
@@ -14369,6 +14393,10 @@ Prefab:
     - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
       propertyPath: m_Name
       value: AmmoBox 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
@@ -14907,6 +14935,10 @@ Prefab:
       propertyPath: m_Name
       value: AmmoBox 3
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
   m_IsPrefabParent: 0
@@ -15054,6 +15086,10 @@ Prefab:
     - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
       propertyPath: m_Name
       value: crate 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
@@ -15489,6 +15525,10 @@ Prefab:
       propertyPath: m_Name
       value: AmmoBox
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
   m_IsPrefabParent: 0
@@ -15608,6 +15648,10 @@ Prefab:
     - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
       propertyPath: m_Name
       value: AmmoBox 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
@@ -17239,6 +17283,10 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 2.99355245
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
   m_IsPrefabParent: 0
@@ -18583,6 +18631,10 @@ Prefab:
       propertyPath: m_Name
       value: AmmoBox 4
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
+      propertyPath: m_TagString
+      value: AmmoBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7a67c3925d5e7422cb842dfb67e727a6, type: 3}
   m_IsPrefabParent: 0
@@ -19053,6 +19105,10 @@ Prefab:
       propertyPath: m_Name
       value: crate 6
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
   m_IsPrefabParent: 0
@@ -19286,6 +19342,10 @@ Prefab:
     - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
       propertyPath: m_Name
       value: crate 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}

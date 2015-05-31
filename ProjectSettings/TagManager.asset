@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Rocket
   - Water
+  - HealthBox
+  - AmmoBox
   layers:
   - Default
   - TransparentFX
