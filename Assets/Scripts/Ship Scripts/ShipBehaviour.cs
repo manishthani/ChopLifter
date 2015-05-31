@@ -15,11 +15,11 @@ public class ShipBehaviour : MonoBehaviour {
 		transform.Rotate(0.0f,rotate, 0.0f);
 	}
 
-	void OnCollisionEnter(Collision col) {
-		if (col.gameObject.tag == "Bullet") {
-			Destroy (gameObject);
-		}
-	}
+//	void OnCollisionEnter(Collision col) {
+//		if (col.gameObject.tag == "Bullet") {
+//			Destroy (gameObject);
+//		}
+//	}
 
 
 
