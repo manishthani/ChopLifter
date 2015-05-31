@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Survivor
   - Helicopter
+  - Bullet
   layers:
   - Default
   - TransparentFX

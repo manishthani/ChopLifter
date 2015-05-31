@@ -9,7 +9,6 @@ public class HeliMovement : MonoBehaviour {
 	public GameObject rearRotor;
 
 	public Slider healthSlider;
-
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
 	public static float maxRotorVelocity = 4000f;			//Graus per segon
@@ -42,6 +41,8 @@ public class HeliMovement : MonoBehaviour {
 	float timeBetweenSurvivor;
 	
 	float midZone = 5.0f;
+
+	public bool alive;
 	
 
 	void Start() {
@@ -50,110 +51,117 @@ public class HeliMovement : MonoBehaviour {
 		Cursor.visible = false;
 		survivorsOnBoard = new Stack();
 		timeBetweenSurvivor = 0.0f;
+		alive = true;
 	}
 	
 	
 	//FixedUpdate s'executa cada volta del bucle de fisica. No depen del framerate. Es el millor lloc per aplicar les forces
 	void FixedUpdate() {
-
-		//Força final que s'aplicara a l'helicopter
-		Vector3 torqueValue = new Vector3 (0, 0, 0); 
-		//Calcul de la força per la inclinacio de l'helicopter
-		Vector3 controlTorque = new Vector3(-mouseY/10* fwdRotorTorqueMultiplier, 1.0f, mouseX/10 * sidewaysRotorTorqueMultiplier);
-		
-		//Si el motor principal esta actiu, se suma la forca al Torque Value i s'aplica al Rigid Body de l'helicopter
-		if ( mainRotorActive == true ) {
-			torqueValue += (controlTorque * maxRotorForce * rotorVelocity);
+		if (alive) {
+			//Força final que s'aplicara a l'helicopter
+			Vector3 torqueValue = new Vector3 (0, 0, 0); 
+			//Calcul de la força per la inclinacio de l'helicopter
+			Vector3 controlTorque = new Vector3(-mouseY/10* fwdRotorTorqueMultiplier, 1.0f, mouseX/10 * sidewaysRotorTorqueMultiplier);
 			
-			GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity);
-			
-			if ( Vector3.Angle( Vector3.up, transform.up ) < 80 ) {
-				transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 2);
+			//Si el motor principal esta actiu, se suma la forca al Torque Value i s'aplica al Rigid Body de l'helicopter
+			if ( mainRotorActive == true ) {
+				torqueValue += (controlTorque * maxRotorForce * rotorVelocity);
+				
+				GetComponent<Rigidbody>().AddRelativeForce( Vector3.up * maxRotorForce * rotorVelocity);
+				
+				if ( Vector3.Angle( Vector3.up, transform.up ) < 80 ) {
+					transform.rotation = Quaternion.Slerp( transform.rotation, Quaternion.Euler( 0, transform.rotation.eulerAngles.y, 0 ), Time.deltaTime * rotorVelocity * 2);
+				}
 			}
+			
+			if ( rearRotorActive == true ) {
+				torqueValue -= (Vector3.up * maxRearRotorForce * rearRotorVelocity);
+			}
+			
+			GetComponent<Rigidbody>().AddRelativeTorque( torqueValue );
 		}
-		
-		if ( rearRotorActive == true ) {
-			torqueValue -= (Vector3.up * maxRearRotorForce * rearRotorVelocity);
-		}
-		
-		GetComponent<Rigidbody>().AddRelativeTorque( torqueValue );
 	}
 	
 	void Update() {
-		mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
-		mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
-		
-		if (Mathf.Abs (mouseX) < midZone) {
-			mouseX = 0.0f;
-		} else {
-			if (mouseX < 0){
-				mouseX = Mathf.Max(mouseX+midZone, -20.0f);
+		if (alive) {
+			mouseX = (Input.mousePosition.x - midX)/Screen.width*100;
+			mouseY = (Input.mousePosition.y - midY)/Screen.height*100;
+			
+			if (Mathf.Abs (mouseX) < midZone) {
+				mouseX = 0.0f;
 			} else {
-				mouseX = Mathf.Min(mouseX-midZone, 20.0f);
+				if (mouseX < 0){
+					mouseX = Mathf.Max(mouseX+midZone, -20.0f);
+				} else {
+					mouseX = Mathf.Min(mouseX-midZone, 20.0f);
+				}
 			}
-		}
-		
-		
-		if (Mathf.Abs (mouseY) < midZone) {
-			mouseY = 0.0f;
-		} else {
-			if (mouseY < 0){
-				mouseY = Mathf.Max(mouseY+midZone, -30.0f);
+			
+			
+			if (Mathf.Abs (mouseY) < midZone) {
+				mouseY = 0.0f;
 			} else {
-				mouseY = Mathf.Min(mouseY-midZone, 30.0f);
+				if (mouseY < 0){
+					mouseY = Mathf.Max(mouseY+midZone, -30.0f);
+				} else {
+					mouseY = Mathf.Min(mouseY-midZone, 30.0f);
+				}
 			}
-		}
 
-		GetComponent<AudioSource>().pitch = rotorVelocity * 1.5f;
-		
-		if ( mainRotorActive == true ) {
-			mainRotor.transform.rotation = transform.rotation * Quaternion.Euler( 0, rotorRotation, 180 );
+			GetComponent<AudioSource>().pitch = rotorVelocity * 1.5f;
+			
+			if ( mainRotorActive == true ) {
+				mainRotor.transform.rotation = transform.rotation * Quaternion.Euler( 0, rotorRotation, 180 );
+			}
+			if ( rearRotorActive == true ) {
+				rearRotor.transform.rotation = transform.rotation * Quaternion.Euler( rearRotorRotation, 0, 90 );
+			}
+			
+			rotorRotation += maxRotorVelocity * rotorVelocity/2 * Time.deltaTime;
+			rearRotorRotation += maxRearRotorVelocity * rotorVelocity * Time.deltaTime;
+			
+			
+			if (rotorVelocity > 0.5f) {
+				damping = 100.0f;
+			}
+			
+			if (rotorVelocity < 0.2f) {
+				damping = 5.0f;
+			}
+			
+			if (rotorVelocity <= 0.1f) {
+				Cursor.lockState = CursorLockMode.Locked;
+			} else {
+				Cursor.lockState = CursorLockMode.None;
+			}
+			
+			float hover_Rotor_Velocity = (GetComponent<Rigidbody>().mass * Mathf.Abs (Physics.gravity.y) / maxRotorForce);
+			float hover_Tail_Rotor_Velocity = (maxRotorForce * rotorVelocity) / maxRearRotorForce;
+			
+			if ( Input.GetAxis( "Vertical" ) != 0.0 ) {
+				rotorVelocity += Input.GetAxis( "Vertical" ) * 0.001f;
+			}else{
+				rotorVelocity = Mathf.Lerp( rotorVelocity, hover_Rotor_Velocity, Time.deltaTime * Time.deltaTime * damping);
+			}
+			rearRotorVelocity = hover_Tail_Rotor_Velocity - Input.GetAxis ("Horizontal");
+			
+			if ( rotorVelocity > 1.0 ) {
+				rotorVelocity = 1.0f;
+			}else if ( rotorVelocity < 0.0) {
+				rotorVelocity = 0.0f;
+			}
 		}
-		if ( rearRotorActive == true ) {
-			rearRotor.transform.rotation = transform.rotation * Quaternion.Euler( rearRotorRotation, 0, 90 );
-		}
-		
-		rotorRotation += maxRotorVelocity * rotorVelocity/2 * Time.deltaTime;
-		rearRotorRotation += maxRearRotorVelocity * rotorVelocity * Time.deltaTime;
-		
-		
-		if (rotorVelocity > 0.5f) {
-			damping = 100.0f;
-		}
-		
-		if (rotorVelocity < 0.2f) {
-			damping = 5.0f;
-		}
-		
-		if (rotorVelocity <= 0.1f) {
-			Cursor.lockState = CursorLockMode.Locked;
-		} else {
-			Cursor.lockState = CursorLockMode.None;
-		}
-		
-		float hover_Rotor_Velocity = (GetComponent<Rigidbody>().mass * Mathf.Abs (Physics.gravity.y) / maxRotorForce);
-		float hover_Tail_Rotor_Velocity = (maxRotorForce * rotorVelocity) / maxRearRotorForce;
-		
-		if ( Input.GetAxis( "Vertical" ) != 0.0 ) {
-			rotorVelocity += Input.GetAxis( "Vertical" ) * 0.001f;
-		}else{
-			rotorVelocity = Mathf.Lerp( rotorVelocity, hover_Rotor_Velocity, Time.deltaTime * Time.deltaTime * damping);
-		}
-		rearRotorVelocity = hover_Tail_Rotor_Velocity - Input.GetAxis ("Horizontal");
-		
-		if ( rotorVelocity > 1.0 ) {
-			rotorVelocity = 1.0f;
-		}else if ( rotorVelocity < 0.0) {
-			rotorVelocity = 0.0f;
+		else {
+			Application.LoadLevel(2);
 		}
 	}
 	void OnTriggerExit (Collider other) {
 		//Aqui controlaremos que el helicoptero no pueda ir al mapa grande sin pasarse el pequeno
-		Debug.Log ("OnTriggerExit: " + other.gameObject.name);
+		//Debug.Log ("OnTriggerExit: " + other.gameObject.name);
 	}
 
 	void OnTriggerEnter (Collider other) {
-		Debug.Log ("ONTRIGGER ENTER" + other.gameObject.name);
+		//Debug.Log ("ONTRIGGER ENTER" + other.gameObject.name);
 		GameObject objectCollided = other.gameObject;
 		//Si encuentra un superviviente y no ha sido rescatado aun, entonces lo salvamos
 		if (objectCollided.tag == "Survivor" && objectCollided.GetComponent<Animator> ().GetBool ("notRescuedYet")) {
@@ -183,8 +191,12 @@ public class HeliMovement : MonoBehaviour {
 				adamSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
 			if (victoriaSurvivor != null)
 				victoriaSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
-		} else if (objectCollided.name == "WaterPlain" || objectCollided.name == "Rocket") {
-			Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
+
+			if (health <= 0) {
+				alive = false;
+			}
+		} else if (objectCollided.name == "WaterPlane" || objectCollided.name == "Rocket" || objectCollided.tag == "Bullet") {
+			//Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
 			health -= 5;
 			healthSlider.value = health;
 		}

@@ -27,12 +27,14 @@ public class PlaneWeapons : MonoBehaviour {
 		RaycastHit hit;
 		if (weaponTimer > weaponFireDelay) {
 			Vector3 fwd = transform.TransformDirection(Vector3.forward);
-			if (Physics.Raycast(transform.position,fwd, out hit, maxDistance)) {	
-				if (hit.collider.gameObject.transform.parent.gameObject.tag == "Helicopter") {
-					weaponTimer = 0.0f;
-					audio.Play();
-					particleEmmiter.emit = true;
-					Instantiate(bulletPrefab,hit.point, transform.rotation);
+			if (Physics.Raycast(transform.position,fwd, out hit, maxDistance)) {
+				if (hit.collider.gameObject.transform.parent != null) {
+					if (hit.collider.gameObject.transform.parent.gameObject.tag == "Helicopter") {
+						weaponTimer = 0.0f;
+						audio.Play();
+						particleEmmiter.emit = true;
+						Instantiate(bulletPrefab,hit.point, transform.rotation);
+					}
 				}
 			}
 		}

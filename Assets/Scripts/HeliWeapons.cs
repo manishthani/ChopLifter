@@ -26,7 +26,10 @@ public class HeliWeapons : MonoBehaviour {
 	private AudioSource leftAudioSource;
 	private AudioSource rightAudioSource;
 
+	private HeliMovement heliMovement;
+
 	void Awake() {
+		heliMovement = leftGun.transform.parent.transform.parent.GetComponent<HeliMovement>();
 		rightGunSlider.maxValue = leftGunSlider.maxValue = rightWeaponBullets;
 		rightGunSlider.value = leftGunSlider.value = leftWeaponBullets;
 		leftParticleEmitter = leftGun.GetComponent<ParticleEmitter> ();
@@ -36,35 +39,37 @@ public class HeliWeapons : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-		leftParticleEmitter.emit = false;
-		if (Input.GetButton("Fire1") && leftWeaponFireTimer >= weaponFireDelay && leftWeaponBullets > 0) {
-			leftWeaponFireTimer = 0.0f;
-			leftAudioSource.Play();
-			leftParticleEmitter.emit = true;
-			
-			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast(leftGun.transform.position, leftGun.transform.forward, out hit)) {
-				Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
+		if (heliMovement.alive) {
+			leftParticleEmitter.emit = false;
+			if (Input.GetButton("Fire1") && leftWeaponFireTimer >= weaponFireDelay && leftWeaponBullets > 0) {
+				leftWeaponFireTimer = 0.0f;
+				leftAudioSource.Play();
+				leftParticleEmitter.emit = true;
+				
+				RaycastHit hit = new RaycastHit();
+				if (Physics.Raycast(leftGun.transform.position, leftGun.transform.forward, out hit)) {
+					Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
+				}
+				--leftWeaponBullets;
+				leftGunSlider.value = leftWeaponBullets;
 			}
-			--leftWeaponBullets;
-			leftGunSlider.value = leftWeaponBullets;
-		}
-		leftWeaponFireTimer += Time.deltaTime;
-		
-		rightParticleEmitter.emit = false;
-		if (Input.GetButton("Fire2") && rightWeaponFireTimer >= weaponFireDelay && rightWeaponBullets > 0) {
-			rightWeaponFireTimer = 0.0f;
-			rightAudioSource.Play();
-			rightParticleEmitter.emit = true;
+			leftWeaponFireTimer += Time.deltaTime;
 			
-			RaycastHit hit = new RaycastHit();
-			if (Physics.Raycast(rightGun.transform.position, rightGun.transform.forward, out hit)) {
-				Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
+			rightParticleEmitter.emit = false;
+			if (Input.GetButton("Fire2") && rightWeaponFireTimer >= weaponFireDelay && rightWeaponBullets > 0) {
+				rightWeaponFireTimer = 0.0f;
+				rightAudioSource.Play();
+				rightParticleEmitter.emit = true;
+				
+				RaycastHit hit = new RaycastHit();
+				if (Physics.Raycast(rightGun.transform.position, rightGun.transform.forward, out hit)) {
+					Instantiate(bulletImpactPrefab, hit.point,Quaternion.LookRotation(hit.normal));
+				}
+				--rightWeaponBullets;
+				rightGunSlider.value = rightWeaponBullets;
 			}
-			--rightWeaponBullets;
-			rightGunSlider.value = rightWeaponBullets;
+			rightWeaponFireTimer += Time.deltaTime;
 		}
-		rightWeaponFireTimer += Time.deltaTime;
 	}
 
 }

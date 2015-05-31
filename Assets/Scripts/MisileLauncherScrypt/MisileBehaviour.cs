@@ -14,7 +14,7 @@ public class MisileBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other) {
-		Debug.Log ("Se destruye por : " + other.gameObject.name);
+		//Debug.Log ("Se destruye por : " + other.gameObject.name);
 		AudioSource.PlayClipAtPoint (audioExplosion, transform.position, volume);
 		Transform parent = other.gameObject.transform.parent;
 		if (parent == null) {
