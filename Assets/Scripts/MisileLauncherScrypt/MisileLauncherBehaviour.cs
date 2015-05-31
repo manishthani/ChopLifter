@@ -29,6 +29,7 @@ public class MisileLauncherBehaviour : MonoBehaviour {
 			missileInstances.Enqueue(missile);
 			GameObject helicopter = GameObject.Find ("Helicopter");
 			missile.transform.LookAt(helicopter.transform);
+
 			//Modificar velocidad para que parezca que le estan disparando al helicoptero
 			missile.GetComponent<Rigidbody>().velocity = (helicopter.transform.position - missile.transform.position).normalized * 15f;
 			nextFire = Time.time + fireRate;
