@@ -14,8 +14,8 @@ public class HeliWeapons : MonoBehaviour {
 	
 	public GameObject bulletImpactPrefab;
 
-	public int rightWeaponBullets = 200;
-	public int leftWeaponBullets = 200;
+	public int rightWeaponBullets = 100;
+	public int leftWeaponBullets = 100;
 
 	private float leftWeaponFireTimer = 0.0f;
 	private float rightWeaponFireTimer = 0.0f;
@@ -70,6 +70,14 @@ public class HeliWeapons : MonoBehaviour {
 				rightGunSlider.value = rightWeaponBullets;
 			}
 			rightWeaponFireTimer += Time.deltaTime;
+		}
+	}
+
+	void OnTriggerEnter (Collider other) {
+		GameObject objectCollided = other.gameObject;
+		if (objectCollided.name == "RescuePlatform") {
+			leftWeaponBullets = rightWeaponBullets = 100;
+			leftGunSlider.value = rightGunSlider.value = 100;
 		}
 	}
 

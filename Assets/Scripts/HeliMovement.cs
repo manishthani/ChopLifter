@@ -11,6 +11,7 @@ public class HeliMovement : MonoBehaviour {
 	public GameObject rearRotor;
 
 	public Slider healthSlider;
+	public Text scoreText;
 	
 	public float maxRotorForce = 22241.1081f;				//Força en Newtons
 	public static float maxRotorVelocity = 4000f;			//Graus per segon
@@ -44,8 +45,13 @@ public class HeliMovement : MonoBehaviour {
 	
 	float midZone = 5.0f;
 
+	public float level = 1;
+
 	public bool alive;
-	
+
+	int rescued= 0;
+
+	int score = 0;
 
 	void Start() {
 		midX = Screen.width / 2;
@@ -54,6 +60,7 @@ public class HeliMovement : MonoBehaviour {
 		survivorsOnBoard = new Stack();
 		timeBetweenSurvivor = 0.0f;
 		alive = true;
+		scoreText.text = "Score: " + score;
 	}
 	
 	
@@ -154,7 +161,10 @@ public class HeliMovement : MonoBehaviour {
 			}
 			if (health <= 0) {
 				alive = false;
+				Cursor.lockState = CursorLockMode.None; 
 			}
+			if (level == 1 && rescued > 2) level++;
+			scoreText.text = "Score: " + score;
 		}
 		else {
 			Application.LoadLevel(2);
@@ -197,9 +207,11 @@ public class HeliMovement : MonoBehaviour {
 				aux.transform.position = new Vector3 (transform.position.x + (survivorsOnBoard.Count % 3) * 1.25f, objectCollided.transform.position.y - 0.2f, transform.position.z);
 				aux.SetActive (true);
 				anim.SetBool ("notRescuedYet", false);
+				++rescued;
+				score += Random.Range(50, 100);
 			}
 		} else if (objectCollided.name.Split ('-') [0] == "superficie") {
-			Debug.Log (objectCollided.transform.parent.name);
+			//Debug.Log (objectCollided.transform.parent.name);
 			GameObject michaelSurvivor = GameObject.Find ("Michael-" + objectCollided.name.Split ('-') [1]);
 			GameObject adamSurvivor = GameObject.Find ("Adam-" + objectCollided.name.Split ('-') [1]);
 			GameObject victoriaSurvivor = GameObject.Find ("Victoria-" + objectCollided.name.Split ('-') [1]);
@@ -209,21 +221,15 @@ public class HeliMovement : MonoBehaviour {
 				adamSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
 			if (victoriaSurvivor != null)
 				victoriaSurvivor.GetComponent<Animator> ().SetBool ("helicopterLanded", true);
-
-		} else if (objectCollided.tag == "Water") {
-			//Debug.Log ("SIZE SURVIVORS: " + survivorsOnBoard.Count);
-			health -= 50;
-			healthSlider.value = health;
-		} else if (objectCollided.tag == "Rocket") {
-			health -= 30;
-			healthSlider.value= health;
-			GameObject aux = Instantiate(explosion,transform.position,transform.rotation) as GameObject	;
-			Destroy(aux,2);
-			Destroy(objectCollided);
-		} else if (objectCollided.tag == "Bullet") {
-
+		
 		}
-
 	}
 
+	public void AddPunctuation(int value) {
+		score += value;
+	}
+
+	public void Die() {
+		alive = false;
+	}
 }

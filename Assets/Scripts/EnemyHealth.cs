@@ -7,8 +7,11 @@ public class EnemyHealth : MonoBehaviour {
 
 	private float health = 100.0f;
 
+	HeliMovement heliMovement;
+
 	// Use this for initialization
 	void Start () {
+		heliMovement = GameObject.FindWithTag("Helicopter").GetComponent<HeliMovement>();
 	
 	}
 	
@@ -18,6 +21,7 @@ public class EnemyHealth : MonoBehaviour {
 			GameObject clone = Instantiate(explosion,transform.position,transform.rotation) as GameObject;
 			Destroy (clone, 2);
 			Destroy (gameObject);
+			heliMovement.AddPunctuation(Random.Range(100,300));
 		}
 	}
 
