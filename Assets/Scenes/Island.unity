@@ -142,6 +142,10 @@ Prefab:
       propertyPath: m_Name
       value: crate
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
+      propertyPath: m_TagString
+      value: HealthBox
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: be465c3ff11ba4e7f8fbc3fffc85e34d, type: 3}
   m_IsPrefabParent: 0
@@ -12200,7 +12204,7 @@ Transform:
   m_LocalScale: {x: 5000, y: 1, z: 5000}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 43
 --- !u!1 &1300057975
 GameObject:
   m_ObjectHideFlags: 0
