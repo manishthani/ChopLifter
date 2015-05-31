@@ -15,7 +15,7 @@ public class MissileTurretBehaviour : MonoBehaviour {
 	void shootMissile() {
 		if (Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
-			GameObject missiles = Instantiate (shotMissile, transform.position  + new Vector3(0.0f,10.0f,0.0f), transform.rotation) as GameObject;
+			GameObject missiles = Instantiate (shotMissile, transform.position  + new Vector3(0.0f,3.0f,3.0f), transform.rotation) as GameObject;
 			missiles.transform.localScale = new Vector3(0.021049f, 0.021049f, 0.021049f);
 
 			//Debug.Log ("ANGULO : " + transform.rotation.eulerAngles.y ) ;
