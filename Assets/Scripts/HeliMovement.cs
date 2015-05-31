@@ -165,6 +165,8 @@ public class HeliMovement : MonoBehaviour {
 			}
 			if (level == 1 && rescued > 2) level++;
 			scoreText.text = "Score: " + score;
+			if (rescued >= 21)
+				Application.LoadLevel(3);
 		}
 		else {
 			Application.LoadLevel(2);
