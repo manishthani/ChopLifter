@@ -9,7 +9,6 @@ public class HeliWeapons : MonoBehaviour {
 
 	public Slider rightGunSlider;
 	public Slider leftGunSlider;
-	public Slider healthSlider;
 
 	public float weaponFireDelay = 0.2f;
 	
@@ -17,7 +16,6 @@ public class HeliWeapons : MonoBehaviour {
 
 	public int rightWeaponBullets = 200;
 	public int leftWeaponBullets = 200;
-	public int health = 100;
 
 	private float leftWeaponFireTimer = 0.0f;
 	private float rightWeaponFireTimer = 0.0f;
@@ -69,8 +67,4 @@ public class HeliWeapons : MonoBehaviour {
 		rightWeaponFireTimer += Time.deltaTime;
 	}
 
-	void OnCollisionEnter (Collision other){
-		--health;
-		healthSlider.value = health;
-	}
 }
