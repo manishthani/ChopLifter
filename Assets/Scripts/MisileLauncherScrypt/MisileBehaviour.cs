@@ -14,13 +14,22 @@ public class MisileBehaviour : MonoBehaviour {
 	}
 
 	void OnTriggerEnter (Collider other) {
-		if (other.gameObject.name != "MisileLauncher" && other.gameObject.name != "Rocket" && other.gameObject.name != "Rocket(Clone)" && other.gameObject.name != "Island1Terrain" && other.gameObject.name != "Aircraft carrier 1" && other.gameObject.name != "MainIslandTerrain" && other.gameObject.name != "Castle" && other.gameObject.name != "WaterPlane") {
 			Debug.Log ("Se destruye por : " + other.gameObject.name);
 			AudioSource.PlayClipAtPoint (audioExplosion, transform.position, volume);
-			GameObject explosionInstance = Instantiate (explosion, transform.position + new Vector3(0.0f,1.0f,0.0f), transform.rotation) as GameObject;
+		if (other.gameObject.name != "MisileLauncher" && other.gameObject.name != "Rocket(Clone)"  && other.gameObject.name != "Rocket") {
+			GameObject explosionInstance = Instantiate (explosion, transform.position + new Vector3 (0.0f, 1.0f, 0.0f), transform.rotation) as GameObject;
 			Destroy (explosionInstance, 3);
-			Destroy (other.gameObject);
 			Destroy (gameObject);
 		}
+		Transform parent = other.gameObject.transform.parent;
+		if (parent != null) {
+			if (other.gameObject.transform.parent.gameObject.name == "Helicopter"){ 
+				Destroy (other.gameObject.transform.parent.gameObject);
+			}
+		}
+		if (other.gameObject.name == "Navyship" || other.gameObject.name == "Plane") {
+			Destroy (other.gameObject);
+		}
+		
 	}
 }
